@@ -14,6 +14,7 @@ class ChatController(private val chatService: ChatService) {
     fun home(model: Model): String {
         model.addAttribute("request", ChatRequestDto(""))
         model.addAttribute("response", "")
+        model.addAttribute("chatHistory", chatService.getChatHistory())
         return "chat"
     }
 
@@ -22,8 +23,9 @@ class ChatController(private val chatService: ChatService) {
         val chatRequestDto = ChatRequestDto(question)
         val responseDto = chatService.sendQuestion(chatRequestDto)
         
-        model.addAttribute("request", chatRequestDto)
+        model.addAttribute("request", ChatRequestDto("")) // 입력창 비우기
         model.addAttribute("response", responseDto.answer)
+        model.addAttribute("chatHistory", chatService.getChatHistory())
         return "chat"
     }
 }

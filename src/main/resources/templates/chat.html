@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .chat-form {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .response {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Chatbot</h1>
+    <div class="container">
+        <form class="chat-form" action="/chat" method="get">
+            <input type="text" name="question" th:value="${request.question}" placeholder="Ask a question...">
+            <button type="submit">Send</button>
+        </form>
+        
+        <div class="response" th:if="${response != ''}">
+            <h3>Response:</h3>
+            <p th:text="${response}"></p>
+        </div>
+    </div>
+</body>
+</html>
